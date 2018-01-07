@@ -61,11 +61,11 @@ Below is a sample usage of the library with the CANTalon enclosure. Modify this 
         CANTalonEnclosure swerveEnclosure4* = new CANTalonEnclosure("enc 4", RobotMap::swerveDriveSpeedController4, RobotMap::swerveDriveCANTalon1, GEAR_RATIO);
 
 	//Swerve Drive initialization
-        RobotDriveSwerve* swerveDrive = new SwerveDrive(	swerveEnclosure1, swerveEnclosure2, swerveEnclosure3, swerveEnclosure4,
+        RobotDriveSwerve swerveDrive* = new SwerveDrive(	swerveEnclosure1, swerveEnclosure2, swerveEnclosure3, swerveEnclosure4,
 					W, L);
 	
 	//Move robot forward at maximum speed
-	swerveDrive.move(1.0, 0.0, 0.0);
+	swerveDrive->move(1.0, 0.0, 0.0);
     }
 
 ```
