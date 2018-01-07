@@ -55,13 +55,13 @@ Below is a sample usage of the library with the CANTalon enclosure. Modify this 
     int main() {
 	
 	//Enclosure initialization
-        CANTalonEnclosure swerveEnclosure1 = new CANTalonEnclosure("enc 1", RobotMap::swerveDriveSpeedController1, RobotMap::swerveDriveCANTalon1, GEAR_RATIO);
-        CANTalonEnclosure swerveEnclosure2 = new CANTalonEnclosure("enc 2", RobotMap::swerveDriveSpeedController2, RobotMap::swerveDriveCANTalon1, GEAR_RATIO);
-        CANTalonEnclosure swerveEnclosure3 = new CANTalonEnclosure("enc 3", RobotMap::swerveDriveSpeedController3, RobotMap::swerveDriveCANTalon1, GEAR_RATIO);
-        CANTalonEnclosure swerveEnclosure4 = new CANTalonEnclosure("enc 4", RobotMap::swerveDriveSpeedController4, RobotMap::swerveDriveCANTalon1, GEAR_RATIO);
+        CANTalonEnclosure swerveEnclosure1* = new CANTalonEnclosure("enc 1", RobotMap::swerveDriveSpeedController1, RobotMap::swerveDriveCANTalon1, GEAR_RATIO);
+        CANTalonEnclosure swerveEnclosure2* = new CANTalonEnclosure("enc 2", RobotMap::swerveDriveSpeedController2, RobotMap::swerveDriveCANTalon1, GEAR_RATIO);
+        CANTalonEnclosure swerveEnclosure3* = new CANTalonEnclosure("enc 3", RobotMap::swerveDriveSpeedController3, RobotMap::swerveDriveCANTalon1, GEAR_RATIO);
+        CANTalonEnclosure swerveEnclosure4* = new CANTalonEnclosure("enc 4", RobotMap::swerveDriveSpeedController4, RobotMap::swerveDriveCANTalon1, GEAR_RATIO);
 
 	//Swerve Drive initialization
-        RobotDriveSwerve swerveDrive = new SwerveDrive(	swerveEnclosure1, swerveEnclosure2, swerveEnclosure3, swerveEnclosure4,
+        RobotDriveSwerve* swerveDrive = new SwerveDrive(	swerveEnclosure1, swerveEnclosure2, swerveEnclosure3, swerveEnclosure4,
 					W, L);
 	
 	//Move robot forward at maximum speed
