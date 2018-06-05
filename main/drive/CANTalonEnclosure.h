@@ -1,8 +1,11 @@
 #pragma once
 
 #include "WPILib.h"
-#include "CANTalon.h"
 #include "SwerveEnclosure.h"
+#include "ctre/phoenix/MotorControl/CAN/TalonSRX.h"
+#include "ctre/Phoenix.h"
+
+#include <math.h>
 
 /*
  * Used for enclosing a CANTalon speed controller (rotational movement) and a
@@ -32,7 +35,7 @@ public:
 	 */
 	CANTalonEnclosure(	std::string name,
 					std::shared_ptr<SpeedController> m_moveMotor,
-					std::shared_ptr<CANTalon> m_turnMotor,
+					std::shared_ptr<WPI_TalonSRX> m_turnMotor,
 					double m_gearRatio);
 	~CANTalonEnclosure();
 
@@ -64,6 +67,14 @@ public:
 	 * Returns the name of the enclosure
 	 */
 	std::string GetName() override;
+	/*
+	 * Reverse encoder direction
+	 */
+	void SetReverseEncoder(bool reverseEncoder);
+	/*
+	 * Reverse steer motor direction
+	 */
+	void SetReverseSteerMotor(bool reverseSteer);
 private:
 	/*
 	 * Using the desired angle for the wheel and the current encoder position,
@@ -85,9 +96,11 @@ private:
 	double ConvertAngle(double angle, double encoderValue);
 
 	std::shared_ptr<SpeedController> moveMotor;
-	std::shared_ptr<CANTalon> turnMotor;
+	std::shared_ptr<WPI_TalonSRX> turnMotor;
 
 	std::string name;
 	double gearRatio = 1988/1.2;
+	bool reverseEncoder = false;
+	bool reverseSteer = false;
 };
 

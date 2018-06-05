@@ -78,5 +78,5 @@ private:
 	std::shared_ptr<SwerveEnclosure> rearRightWheel;
 
 	//Stores the current mode of the swerve drive
-	DriveMode m_mode = kRobotCentric;
+	DriveMode m_mode = kFieldCentric;
 };

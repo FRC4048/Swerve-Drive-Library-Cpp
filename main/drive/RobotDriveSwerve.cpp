@@ -1,5 +1,4 @@
 #include "RobotDriveSwerve.h"
-#include "WPILib.h"
 
 RobotDriveSwerve::RobotDriveSwerve(SwerveEnclosure* frontLeftWheel,
 								   SwerveEnclosure* frontRightWheel,

@@ -27,7 +27,7 @@ void CANTalonEnclosure::MoveWheel(double speedVal, double rotationVal)
 	}
 
 	SetSpeed(speedVal);
-	if(speedVal != 0)
+	if(speedVal != 0.0)
 		SetAngle(rotationVal);
 }
 
@@ -47,15 +47,20 @@ void CANTalonEnclosure::SetInverted(CANTalonEnclosure::MotorType type, bool val)
 		moveMotor->SetInverted(val);
 }
 
-void CANTalonEnclosure::SetPID(double P, double I, double D, double F)
-{
-	turnMotor->SetPID(P, I, D, F);
+void TalonSRXEnclosure::SetPID(double P, double I, double D, double F) {//Changed
+	turnMotor->Config_kP(0, P, 100);
+	turnMotor->Config_kI(0, I, 100);
+	turnMotor->Config_kD(0, D, 100);
+	turnMotor->Config_kF(0, F, 100);
 }
 
 //Outputs encoder values for the corresponding motor
 double CANTalonEnclosure::GetEncoderVal()
 {
-	return turnMotor->GetEncPosition();
+	if(reverseEncoder)
+		return -1*turnMotor->GetSelectedSensorPosition(0);
+	else
+		return turnMotor->GetSelectedSensorPosition(0);
 }
 
 void CANTalonEnclosure::SetSpeed(double speedVal)
@@ -65,8 +70,10 @@ void CANTalonEnclosure::SetSpeed(double speedVal)
 
 void CANTalonEnclosure::SetAngle(double desiredAngle)
 {
-	turnMotor->SetSetpoint(desiredAngle);
-	turnMotor->Enable();
+	if(reverseSteer)
+		turnMotor->Set(ControlMode::Position, -1*desiredAngle*gearRatio);
+	else
+		turnMotor->Set(ControlMode::Position, desiredAngle*gearRatio);
 }
 
 bool CANTalonEnclosure::ShouldReverse(double wa)
@@ -112,4 +119,14 @@ double CANTalonEnclosure::ConvertAngle(double angle, double encoderValue)
 std::string CANTalonEnclosure::GetName()
 {
 	return name;
+}
+
+void TalonSRXEnclosure::SetReverseEncoder(bool reverseEncoder)
+{
+	this->reverseEncoder = reverseEncoder;
+}
+
+void TalonSRXEnclosure::SetReverseSteerMotor(bool reverseSteer)
+{
+	this->reverseSteer = reverseSteer;
 }
