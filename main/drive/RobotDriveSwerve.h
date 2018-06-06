@@ -67,6 +67,11 @@ public:
 	 */
 	void SetMode(DriveMode mode);
 
+	/*
+	 * Toggles the swerve drive mode (Toggles between field and robot centric)
+	 */
+	void ToggleMode();
+
 private:
 	//Stores the calculated values used by each wheel of the swerve drive
 	std::shared_ptr<SwerveMath> mathSystem;

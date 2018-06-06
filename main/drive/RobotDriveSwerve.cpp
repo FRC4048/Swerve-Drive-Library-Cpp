@@ -15,7 +15,7 @@ RobotDriveSwerve::RobotDriveSwerve(SwerveEnclosure* frontLeftWheel,
 	this->rearLeftWheel.reset(rearLeftWheel);
 	this->rearRightWheel.reset(rearRightWheel);
 
-	mathSystem.reset(new SwerveMath(length, width));
+	this->mathSystem.reset(new SwerveMath(length, width));
 }
 
 void RobotDriveSwerve::move(double x, double y, double rotation, double angle)
@@ -60,5 +60,12 @@ void RobotDriveSwerve::SetMode(DriveMode mode)
 		break;
 	default:
 		DriverStation::ReportError("ERROR: Invalid drivetrain mode input");
+	}
+}
+void RobotDriveSwerve::ToggleMode() {
+	if(GetMode() == kRobotCentric) {
+		m_mode = kFieldCentric;
+	} else {
+		m_mode = kRobotCentric;
 	}
 }

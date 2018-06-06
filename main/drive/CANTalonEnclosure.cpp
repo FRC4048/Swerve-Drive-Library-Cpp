@@ -2,10 +2,11 @@
 
 CANTalonEnclosure::CANTalonEnclosure(	std::string name,
 										std::shared_ptr<SpeedController> m_moveMotor,
-										std::shared_ptr<CANTalon> m_turnMotor,
+										std::shared_ptr<WPI_TalonSRX> m_turnMotor,
 										double m_gearRatio)
 {
 	this->name = name;
+	moveMotor = m_moveMotor;
 	moveMotor = m_moveMotor;
 	turnMotor = m_turnMotor;
 	gearRatio = m_gearRatio;
@@ -47,7 +48,7 @@ void CANTalonEnclosure::SetInverted(CANTalonEnclosure::MotorType type, bool val)
 		moveMotor->SetInverted(val);
 }
 
-void TalonSRXEnclosure::SetPID(double P, double I, double D, double F) {//Changed
+void CANTalonEnclosure::SetPID(double P, double I, double D, double F) {//Changed
 	turnMotor->Config_kP(0, P, 100);
 	turnMotor->Config_kI(0, I, 100);
 	turnMotor->Config_kD(0, D, 100);
@@ -121,12 +122,12 @@ std::string CANTalonEnclosure::GetName()
 	return name;
 }
 
-void TalonSRXEnclosure::SetReverseEncoder(bool reverseEncoder)
+void CANTalonEnclosure::SetReverseEncoder(bool reverseEncoder)
 {
 	this->reverseEncoder = reverseEncoder;
 }
 
-void TalonSRXEnclosure::SetReverseSteerMotor(bool reverseSteer)
+void CANTalonEnclosure::SetReverseSteerMotor(bool reverseSteer)
 {
 	this->reverseSteer = reverseSteer;
 }
