@@ -72,9 +72,9 @@ void CANTalonEnclosure::SetSpeed(double speedVal)
 void CANTalonEnclosure::SetAngle(double desiredAngle)
 {
 	if(reverseSteer)
-		turnMotor->Set(ControlMode::Position, -1*desiredAngle*gearRatio);
+		turnMotor->Set(ctre::phoenix::motorcontrol::ControlMode::Position, -1*desiredAngle*gearRatio);
 	else
-		turnMotor->Set(ControlMode::Position, desiredAngle*gearRatio);
+		turnMotor->Set(ctre::phoenix::motorcontrol::ControlMode::Position, desiredAngle*gearRatio);
 }
 
 bool CANTalonEnclosure::ShouldReverse(double wa)
